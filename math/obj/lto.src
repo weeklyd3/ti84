@@ -1131,12 +1131,24 @@ BB2_54:
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	hl, 7
+	ld	hl, 6
 	push	hl
 	call	_os_SetCursorPos
 	pop	hl
 	pop	hl
 	ld	hl, _.str.15
+	push	hl
+	call	_os_PutStrFull
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	ld	hl, 7
+	push	hl
+	call	_os_SetCursorPos
+	pop	hl
+	pop	hl
+	ld	hl, _.str.16
 	push	hl
 	call	_os_PutStrFull
 	pop	hl
@@ -1220,6 +1232,11 @@ _.str.14:
 	section	.rodata,"a",@progbits
 	private	_.str.15
 _.str.15:
+	db	"Lower is better!", 0
+
+	section	.rodata,"a",@progbits
+	private	_.str.16
+_.str.16:
 	db	"github.com/weeklyd3/ti84", 0
 
 	ident	"clang version 15.0.0 (https://github.com/CE-Programming/llvm-project 23b78267b5d376b232475d0805a937e54b61e0d0)"

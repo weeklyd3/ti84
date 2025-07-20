@@ -160,6 +160,8 @@ int main(void) {
 	os_ClrHome();
 	os_SetCursorPos(0, 0);
 	os_PutStrFull(status);
+	os_SetCursorPos(6, 0);
+	os_PutStrFull("Lower is better!");
 	os_SetCursorPos(7, 0);
 	os_PutStrFull("github.com/weeklyd3/ti84");
 	while (!os_GetCSC());

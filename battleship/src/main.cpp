@@ -164,6 +164,8 @@ int main(void) {
 	os_PutStrFull("How to Play");
 	os_SetCursorPos(1, 0);
 	os_PutStrFull("Use the arrow keys to aim and hit a spot on your opponent's grid. X marks hits, m marks miss.");
+	os_SetCursorPos(5, 0);
+	os_PutStrFull("During the game, you can press 9 to bail out of this program.");
 	os_SetCursorPos(8, 0);
 	os_PutStrFull("Press any key...");
 	while (!os_GetCSC());
@@ -222,8 +224,14 @@ int main(void) {
 			sprintf(grid_number, "P%d wins!", winner);
 			os_SetCursorPos(0, 9);
 			os_PutStrFull(grid_number);
+			os_SetCursorPos(2, 8);
+			os_PutStrFull(" Press any");
+			os_SetCursorPos(3, 8);
+			os_PutStrFull(" key to ");
+			os_SetCursorPos(4, 8);
+			os_PutStrFull(" exit!");
 			os_SetCursorPos(8, 0);
-			os_PutStrFull("Press any key to exit...");
+			os_PutStrFull("github.com/weeklyd3/ti84");
 			while (!os_GetCSC());
 			return 0;
 		}

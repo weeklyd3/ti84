@@ -414,6 +414,7 @@ int main() {
 						draw(p2, deck);
 						draw(dealer, deck);
 					}
+					shuffle(deck, 52);
 					turn = 0;
 					score_processed = false;
 					break;

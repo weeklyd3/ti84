@@ -1222,7 +1222,7 @@ BB7_10:
 	push	hl
 	pop	iy
 	push	ix
-	ld	bc, -181
+	ld	bc, -184
 	add	ix, bc
 	ld	(ix), hl
 	pop	ix
@@ -1242,7 +1242,7 @@ BB7_10:
 	ld	hl, (ix)
 	pop	ix
 	push	ix
-	ld	bc, -178
+	ld	bc, -181
 	add	ix, bc
 	ld	(ix), hl
 	pop	ix
@@ -1459,7 +1459,7 @@ BB7_14:
 BB7_15:
 	push	hl
 	call	__Z15calculate_totalPP4card
-	ld	bc, -184
+	ld	bc, -178
 	lea	iy, ix
 	add	iy, bc
 	ld	(iy), hl
@@ -1510,7 +1510,7 @@ BB7_17:
 	ld	bc, 1
 	or	a, a
 	sbc	hl, bc
-	ld	bc, -184
+	ld	bc, -178
 	lea	hl, ix
 	push	af
 	add	hl, bc
@@ -1523,34 +1523,37 @@ BB7_17:
 	pop	af
 	ld	(ix), hl
 	pop	ix
+	ld	bc, 0
 	jr	z, BB7_19
+	ld	(ix - 3), bc
 	ld	bc, -151
 	lea	hl, ix
 	add	hl, bc
 	ld	(hl), de
+	ld	bc, (ix - 3)
 BB7_19:
 	lea	hl, iy
 	ld	de, 3
 	or	a, a
 	sbc	hl, de
-	ld	bc, -145
+	ld	de, -145
 	lea	hl, ix
 	push	af
-	add	hl, bc
+	add	hl, de
 	pop	af
-	ld	de, (hl)
-	jr	nz, BB7_22
-	ld	bc, -151
+	ld	iy, (hl)
+	jp	nz, BB7_22
+	ld	de, -151
 	lea	hl, ix
-	add	hl, bc
+	add	hl, de
 	ld	hl, (hl)
-	ld	bc, 17
+	ld	de, 17
 	or	a, a
-	sbc	hl, bc
+	sbc	hl, de
 	call	pe, __setflag
 	jp	p, BB7_22
 BB7_21:
-	push	de
+	push	iy
 	ld	bc, -142
 	lea	hl, ix
 	add	hl, bc
@@ -1565,38 +1568,39 @@ BB7_21:
 	ld	hl, (hl)
 	push	hl
 	call	__Z15calculate_totalPP4card
-	ld	bc, -145
+	ld	de, -145
 	lea	iy, ix
-	add	iy, bc
-	ld	de, (iy)
-	push	hl
-	pop	iy
-	pop	hl
-	lea	hl, iy
-	ld	bc, 17
+	add	iy, de
+	ld	iy, (iy)
+	ld	bc, 0
+	push	ix
+	ld	de, -151
+	add	ix, de
+	ld	(ix), hl
+	pop	ix
+	pop	de
+	ld	de, 17
 	or	a, a
-	sbc	hl, bc
+	sbc	hl, de
 	call	pe, __setflag
-	ld	bc, -151
+	ld	de, -151
 	lea	hl, ix
 	push	af
-	add	hl, bc
+	add	hl, de
 	pop	af
-	ld	(hl), iy
+	ld	hl, (hl)
 	push	ix
-	ld	bc, -172
+	ld	de, -172
 	push	af
-	add	ix, bc
+	add	ix, de
 	pop	af
-	ld	(ix), iy
+	ld	(ix), hl
 	pop	ix
 	jp	m, BB7_21
 BB7_22:
-	or	a, a
-	sbc	hl, hl
-	push	hl
-	push	hl
-	push	de
+	push	bc
+	push	bc
+	push	iy
 	ld	hl, _.str.26
 	push	hl
 	call	__Z10draw_statsPKcPP4cardii
@@ -1742,13 +1746,13 @@ BB7_25:
 	push	hl
 	pop	de
 	ld	(ix - 3), bc
-	ld	bc, -178
+	ld	bc, -181
 	lea	iy, ix
 	add	iy, bc
 	ld	hl, (iy)
 	add	hl, de
 	push	ix
-	ld	de, -178
+	ld	de, -181
 	add	ix, de
 	ld	(ix), hl
 	pop	ix
@@ -1824,7 +1828,7 @@ BB7_25:
 	ld	hl, _.str.37
 	jp	BB7_31
 BB7_28:
-	ld	de, -178
+	ld	de, -181
 	lea	hl, ix
 	add	hl, de
 	ld	hl, (hl)
@@ -1971,7 +1975,7 @@ BB7_31:
 	ld	e, 0
 BB7_34:
 	ld	(ix - 3), de
-	ld	de, -184
+	ld	de, -178
 	lea	hl, ix
 	add	hl, de
 	ld	hl, (hl)
@@ -2041,17 +2045,16 @@ BB7_37:
 	ld	de, 162
 	jp	BB7_68
 BB7_38:
-	ld	de, -184
+	ld	de, -178
 	lea	hl, ix
 	add	hl, de
 	ld	hl, (hl)
-	push	hl
-	pop	iy
 	or	a, a
 	sbc	hl, bc
 	call	pe, __setflag
 	ld	e, d
 	ld	a, e
+	ld	iyl, a
 	jp	m, BB7_40
 	ld	a, 0
 BB7_40:
@@ -2059,13 +2062,17 @@ BB7_40:
 	lea	hl, ix
 	add	hl, de
 	ld	hl, (hl)
-	lea	de, iy
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -178
+	add	ix, bc
+	ld	de, (ix)
+	pop	ix
 	or	a, a
 	sbc	hl, de
 	call	pe, __setflag
-	ld	e, -1
+	ld	e, iyl
 	ld	l, e
-	ld	(ix - 3), bc
 	ld	bc, -136
 	lea	iy, ix
 	push	af
@@ -2131,7 +2138,7 @@ BB7_47:
 	ld	(ix), hl
 	pop	ix
 	push	ix
-	ld	de, -181
+	ld	de, -184
 	add	ix, de
 	ld	hl, (ix)
 	pop	ix
@@ -2142,7 +2149,7 @@ BB7_47:
 	ld	iy, (iy)
 	add	hl, bc
 	push	ix
-	ld	de, -181
+	ld	de, -184
 	add	ix, de
 	ld	(ix), hl
 	pop	ix
@@ -2298,7 +2305,7 @@ BB7_68:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -181
+	ld	bc, -184
 	lea	hl, ix
 	add	hl, bc
 	ld	hl, (hl)
@@ -2429,29 +2436,28 @@ BB7_79:
 	ld	a, e
 	cp	a, 54
 	jr	nz, BB7_72
-	ld	bc, 52
-	ld	de, 0
+	ld	de, 52
 BB7_82:
-	push	bc
+	push	de
 	pop	hl
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jp	z, BB7_86
-	ld	de, -142
+	ld	bc, -142
 	lea	hl, ix
-	add	hl, de
+	add	hl, bc
 	ld	hl, (hl)
 	push	hl
-	ld	de, -154
+	ld	bc, -154
 	lea	hl, ix
-	add	hl, de
+	add	hl, bc
 	ld	hl, (hl)
 	push	hl
-	ld	de, -133
+	ld	bc, -133
 	lea	hl, ix
-	add	hl, de
-	ld	(hl), bc
+	add	hl, bc
+	ld	(hl), de
 	call	__Z4drawPP4cardS1_
 	pop	hl
 	pop	hl
@@ -2479,14 +2485,13 @@ BB7_82:
 	ld	hl, (hl)
 	push	hl
 	call	__Z4drawPP4cardS1_
-	ld	de, -133
+	ld	bc, -133
 	lea	hl, ix
-	add	hl, de
-	ld	bc, (hl)
-	ld	de, 0
+	add	hl, bc
+	ld	de, (hl)
 	pop	hl
 	pop	hl
-	dec	bc
+	dec	de
 	jr	BB7_82
 BB7_84:
 	ld	bc, -151
@@ -2508,9 +2513,21 @@ BB7_85:
 	add	iy, bc
 	ld	iy, (iy)
 	add	iy, de
-	jr	BB7_91
+	jp	BB7_91
 BB7_86:
-	push	de
+	ld	hl, 52
+	push	hl
+	ld	bc, -142
+	lea	hl, ix
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
+	call	__Z7shufflePP4cardi
+	pop	hl
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
 	pop	iy
 	xor	a, a
 	ld	bc, -188
@@ -2570,7 +2587,7 @@ BB7_90:
 	add	hl, bc
 	ld	de, (hl)
 BB7_91:
-	ld	de, -178
+	ld	de, -181
 	lea	hl, ix
 	add	hl, de
 	ld	hl, (hl)
@@ -2687,7 +2704,7 @@ BB7_99:
 	add	hl, bc
 	ld	hl, (hl)
 	push	hl
-	ld	bc, -181
+	ld	bc, -184
 	lea	hl, ix
 	add	hl, bc
 	ld	hl, (hl)
